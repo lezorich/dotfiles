@@ -1,0 +1,20 @@
+[user]
+	name = Lukas Zorich
+	email = lukas.zorich@gmail.com
+[credential]
+	helper = cache --timeout=3600
+[branch]
+	autosetuprebase = always
+[push]
+	default = simple
+[color]
+    diff = auto
+    interactive = auto
+    pager = true
+	ui = true
+	status = auto
+	branch = auto
+[core]
+	excludesfile = /home/lukas/.gitignore_global
+[diff]
+	tool = vimdiff
