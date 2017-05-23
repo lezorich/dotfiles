@@ -19,6 +19,9 @@ bind-key h select-pane -L
 unbind-key l
 bind-key l select-pane -R
 
+# vim copy mode
+bind-key -T copy-mode-vi 'v' send -X begin-selection
+
 # decrease command delay (increases vim responsiveness)
 set -sg escape-time 1
 
@@ -103,7 +106,7 @@ bind a last-window
 ###########################
 
 # color status bar
-set -g status-bg colour235
+set -g status-bg colour236
 set -g status-fg white
 
 # highlight current window
@@ -111,7 +114,16 @@ set-window-option -g window-status-current-fg black
 set-window-option -g window-status-current-bg colour150
 
 # set color of active pane
-set -g pane-border-fg colour235
+set -g pane-border-fg colour236
 set -g pane-border-bg black
 set -g pane-active-border-fg colour150
 set -g pane-active-border-bg black
+
+############################
+# Plugin manager
+############################
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-yank'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run 'tmux/plugins/tpm/tpm'
