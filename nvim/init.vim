@@ -22,6 +22,8 @@ Plug 'zchee/deoplete-jedi'
 Plug 'bfredl/nvim-miniyank'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'w0rp/ale'
+Plug 'machakann/vim-highlightedyank'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
