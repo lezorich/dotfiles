@@ -45,3 +45,9 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " Fugitive
 """""""""""""""
 set diffopt+=vertical
+
+
+""""""""""""""""
+" vim-go
+"""""""""""""""
+let g:go_fmt_command = "goimports"
