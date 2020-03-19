@@ -60,6 +60,7 @@ set -g status-left-length 40
 set -g status-left '#[fg=colour150]#S#[fg=colour153] #I:#P#[default] '
 
 # show hostname, date, time, and battery in right status bar
+set -g status-right-length 50
 set-option -g status-right '#[fg=colour150]#H#[default] %d/%m/%y %H:%M'
  #[fg=red]#(battery discharging)#[default]#(battery charging)'
 
