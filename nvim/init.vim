@@ -1,12 +1,13 @@
-let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-rhubarb'  " For Github autocomplete
+Plug 'tpope/vim-repeat'  " TODO(lukas): I use this?
 Plug 'jiangmiao/auto-pairs'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kien/ctrlp.vim'
@@ -15,15 +16,21 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'terryma/vim-expand-region'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-scripts/mru.vim'
 Plug 'chriskempson/base16-vim'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'zchee/deoplete-jedi'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'bfredl/nvim-miniyank'
 Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'machakann/vim-highlightedyank'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mileszs/ack.vim'
+Plug 'psf/black'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 
 call plug#end()
 
@@ -71,10 +78,12 @@ nnoremap <Leader>tw :call DeleteTrailingWS()<CR>
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Access colors present in 256 colorspace
- let base16colorspace=256
+let base16colorspace=256
 
 " Set colorscheme
-colorscheme base16-tomorrow
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
+colorscheme base16-tomorrow-night
 
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
@@ -127,22 +136,26 @@ endif
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-" Show eol ¬
-nmap <silent> <leader>a :set list!<CR>
+" Set relative numbers by default, but add a key binding to toggle
+set relativenumber
+map <silent> <leader>r :set relativenumber!<CR>
+
+" See live substitutions
+set inccommand=split
 
 " set list
-set list
-set lcs+=eol:¬
+" set list
+" set lcs+=eol:¬
 
 " Choose eol colors
-highlight NonText ctermfg=238
+highlight NonText ctermfg=237
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Files, backups and undo
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
-set nowb
+set nowb  " abbrev for set nowritebackup
 set noswapfile
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -181,9 +194,8 @@ vnoremap <silent> # :call VisualSelection('b', '')<CR>
 map j gj
 map k gk
 
-" Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
+" Map <Space> to / (search)
 map <space> /
-map <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
@@ -199,13 +211,7 @@ set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ 
 " => Spell checking
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
-
-" Shortcuts using <leader>
-map <leader>sn ]s
-map <leader>sp [s
-map <leader>sa zg
-map <leader>s? z=
+map <leader>sc :setlocal spell!<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Load plugins
